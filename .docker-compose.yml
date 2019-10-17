@@ -1,0 +1,13 @@
+version: "3.5"
+
+services:
+  api:
+    image: fynxiu/ddns
+    build: .
+    environment:
+      ALI_ACCESS_KEY_ID: "key id of your account"
+      ALI_ACCESS_KEY_SECRET: "key secret of your account"
+      ALI_DOMAIN: "domain name that you want resolve"
+      ALI_RR: "record names separated with whitespace, e.g. git ssh ..."
+
+
