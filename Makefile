@@ -1,7 +1,7 @@
 .PONY: all script dep test lint
 
 app = ddns
-tag =
+tag = $(shell git describe --tags $(shell git rev-list --tags --max-count=1))
 
 all: lint test build
 
@@ -22,7 +22,6 @@ build-alpine:
 	@echo "building $(app) for alpine"
 	CGO_ENABLED=0 OS=alpine ARCH=amd64 go build -o script/alpine/$(app)
 
-docker-alpine: override tag=`git describe --tags $(git rev-list --tags --max-count=1)`
 docker-alpine: build-alpine
 	@echo "building docker image for $(app) alpine version"
 	docker build ./script/alpine -t ddns
