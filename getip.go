@@ -2,7 +2,9 @@ package main
 
 import (
 	"errors"
+
 	"github.com/miekg/dns"
+	"github.com/sirupsen/logrus"
 )
 
 type dnsClient struct {
@@ -25,7 +27,7 @@ func DefaultDnsClient() *dnsClient {
 			},
 			{
 				"o-o.myaddr.l.google.com",
-				"ns1.google.com",
+				"ns1.google.com:53",
 			},
 		},
 	}
@@ -41,6 +43,7 @@ func (c *dnsClient) getIP() (ip string, err error) {
 		msg := newDnsMsg(r.questionDomain)
 		resp, _, err := c.Exchange(msg, r.host)
 		if err != nil {
+			logrus.WithError(err).Infoln(111)
 			continue
 		}
 
@@ -50,6 +53,7 @@ func (c *dnsClient) getIP() (ip string, err error) {
 
 		ip, err := extractIP(resp)
 		if err != nil {
+			logrus.WithError(err).Infoln(222)
 			continue
 		}
 		return ip, nil

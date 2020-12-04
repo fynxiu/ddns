@@ -46,12 +46,13 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	origin := 1 * time.Second
+	origin := 5 * time.Second
 	interval := origin
 	for {
 		ip, err := GetIP()
 		// 获取ip失败, 在暂停interval后继续尝试
 		if err != nil {
+			logrus.WithError(err).Warningln("failed to get ip")
 			time.Sleep(interval)
 			interval *= 2
 			continue
