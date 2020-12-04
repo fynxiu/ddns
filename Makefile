@@ -20,7 +20,7 @@ build:
 
 build-alpine:
 	@echo "building $(app) for alpine"
-	CGO_ENABLED=0 GOOS=alpine GOARCH=amd64 go build -o script/alpine/$(app)
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o script/alpine/$(app)
 
 docker-alpine: build-alpine
 	@echo "building docker image for $(app) alpine version"
