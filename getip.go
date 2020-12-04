@@ -4,7 +4,6 @@ import (
 	"errors"
 
 	"github.com/miekg/dns"
-	"github.com/sirupsen/logrus"
 )
 
 type dnsClient struct {
@@ -43,7 +42,6 @@ func (c *dnsClient) getIP() (ip string, err error) {
 		msg := newDnsMsg(r.questionDomain)
 		resp, _, err := c.Exchange(msg, r.host)
 		if err != nil {
-			logrus.WithError(err).Infoln(111)
 			continue
 		}
 
@@ -53,7 +51,6 @@ func (c *dnsClient) getIP() (ip string, err error) {
 
 		ip, err := extractIP(resp)
 		if err != nil {
-			logrus.WithError(err).Infoln(222)
 			continue
 		}
 		return ip, nil
