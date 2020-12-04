@@ -6,4 +6,6 @@ ADD . /etc/ddns
 
 RUN cd /etc/ddns && go mod download && go build && mv ddns /usr/local/bin/
 
+RUN chmod +x /usr/local/bin/ddns
+
 CMD ["ddns"]
