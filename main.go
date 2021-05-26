@@ -39,6 +39,8 @@ func main() {
 	flag.StringVar(&accessKeySecret, "secret", accessKeySecret, "access key secret")
 	var checkIntervalRaw = flag.Int("ci", 2, "check interval unit minute")
 
+	flag.Parse()
+
 	records := strings.Split(rr, " ")
 	checkInterval := time.Duration(*checkIntervalRaw) * time.Minute
 
